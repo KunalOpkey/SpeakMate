@@ -42,18 +42,13 @@
       }
  
       async function translateToEnglish(text) {
-const res = await fetch("https://libretranslate.de/translate", {
-    method: "POST",
-    body: JSON.stringify({
-      q: text,
-      source: "hi",   // Hindi input
-      target: "en",   // English output
-      format: "text"
-    }),
-    headers: { "Content-Type": "application/json" }
-  });
+const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=hi|en`;
+ 
+  const res = await fetch(url);
   const data = await res.json();
-  return data.translatedText;
+ 
+  // Return translated text
+  return data.responseData.translatedText;
 }
     </script>
   </body>
